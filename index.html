@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>산들바다 발제 평가의견서</title>
+<meta name="robots" content="noindex">
+<style>
+/* ── 디자인 시스템: 미니멀리즘 × Emerald ── */
+:root{
+  --sys-acc:#10B981; --sys-acc-c:#fff; --sys-tint:rgba(16,185,129,0.16);
+  --ms-br-r:2px; --ms-br-sh:0 1px 3px rgba(0,0,0,.06);
+  --ms-main-bg:#fff; --ms-t1:#111; --ms-t2:#888; --ms-t3:#BBB;
+  --ms-btn-bg:#1A1A1A; --ms-btn-c:#fff; --ms-btn-sh:none;
+  --ms-chip-bg:#F4F4F4; --ms-chip-c:#888; --ms-chip-r:2px; --ms-art-r:2px;
+  --ms-track-bd:1px solid #EEE;
+  /* 평가 척도 4단계 */
+  --s4:#0E9F6E; --s4-bg:#E6F7F0;
+  --s3:#5BA8A0; --s3-bg:#EAF4F3;
+  --s2:#D99A1E; --s2-bg:#FBF3E2;
+  --s1:#D1483B; --s1-bg:#FBE9E7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#F4F4F4;color:var(--ms-t1);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",system-ui,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{padding:22px 12px 70px;display:flex;flex-direction:column;align-items:center;gap:12px}
+
+/* ── 상단: 심사위원 정보 + 기업 탭 ── */
+.top{width:210mm;background:#fff;box-shadow:var(--ms-br-sh);border-radius:var(--ms-br-r);padding:14px 18px 12px}
+.judge{display:flex;gap:18px;align-items:flex-end;padding-bottom:12px;border-bottom:var(--ms-track-bd)}
+.judge .f{flex:1}
+.judge label{display:block;font-size:11px;color:var(--ms-t2);letter-spacing:.06em;margin-bottom:4px}
+.judge input{width:100%;border:0;border-bottom:1px solid #DDD;font:inherit;font-size:15px;font-weight:600;padding:2px 0 4px;outline:0;border-radius:0;background:transparent}
+.judge input:focus{border-bottom-color:var(--sys-acc)}
+.judge input::placeholder{color:var(--ms-t3);font-weight:400}
+.judge .fixed{font-size:15px;font-weight:600;padding:2px 0 4px}
+.tabs{display:flex;gap:4px;margin-top:12px}
+.tab{flex:1;border:1px solid #E6E6E6;border-radius:var(--ms-br-r);padding:7px 4px 6px;text-align:center;cursor:pointer;background:#fff;font:inherit;position:relative;transition:.12s}
+.tab .n{display:block;font-size:10px;color:var(--ms-t3);font-weight:600;letter-spacing:.06em}
+.tab .c{display:block;font-size:11.5px;font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab:hover{border-color:#BBB}
+.tab.active{border-color:var(--ms-t1);box-shadow:inset 0 -2px 0 var(--ms-t1)}
+.tab.done{background:var(--sys-tint);border-color:transparent}
+.tab.done .n{color:var(--sys-acc)}
+.tab.done .n::after{content:" ✓"}
+.tab.active.done{border-color:var(--sys-acc);box-shadow:inset 0 -2px 0 var(--sys-acc)}
+
+/* ── 용지 ── */
+.sheet{width:210mm;height:297mm;background:var(--ms-main-bg);box-shadow:var(--ms-br-sh);
+  padding:14mm 15mm 12mm;display:none;flex-direction:column;border-radius:var(--ms-br-r)}
+.sheet.active{display:flex}
+
+.hd{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:4mm;border-bottom:1.5px solid var(--ms-t1)}
+.hd h1{font-size:19pt;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hd .meta{text-align:right;font-size:8.5pt;color:var(--ms-t2);line-height:1.6}
+.hd .meta b{color:var(--ms-t1);font-weight:600}
+
+.info{display:grid;grid-template-columns:1.3fr 1fr 1fr .7fr;border-bottom:var(--ms-track-bd);margin-bottom:4mm}
+.info>div{padding:3mm 3mm 2.6mm 0;border-right:var(--ms-track-bd)}
+.info>div+div{padding-left:3.5mm}
+.info>div:last-child{border-right:0}
+.info label{display:block;font-size:7.5pt;color:var(--ms-t2);letter-spacing:.06em;margin-bottom:1.4mm}
+.info .v{font-size:11pt;font-weight:600;padding-bottom:1mm;border-bottom:1px solid #DDD;min-height:6.5mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.info .v.co{color:var(--ms-t1)}
+.info .v.co .no{color:var(--sys-acc);margin-right:1.5mm}
+.info .v.ph{color:var(--ms-t3);font-weight:400}
+
+.body{flex:1;display:flex;flex-direction:column;min-height:0}
+.sec{flex:1 1 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.sec+.sec{border-top:var(--ms-track-bd);padding-top:3.5mm}
+.sec-hd{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:2.2mm}
+.sec-hd .n{font-size:8pt;color:var(--sys-acc);font-weight:700;letter-spacing:.1em}
+.sec-hd h2{font-size:11.5pt;font-weight:700}
+.sec-hd .s{font-size:7.5pt;color:var(--ms-t2);margin-left:auto}
+
+/* 정량 표 */
+table{width:100%;border-collapse:collapse;flex:1;table-layout:fixed}
+col.cq{width:auto}col.co{width:20.5mm}
+thead th{font-size:7.5pt;font-weight:600;padding:0 0 1.6mm;border-bottom:1px solid #DDD;text-align:center;letter-spacing:.02em}
+thead th:first-child{text-align:left;color:var(--ms-t2);font-weight:500}
+thead th.h4{color:var(--s4)}thead th.h3{color:var(--s3)}thead th.h2{color:var(--s2)}thead th.h1{color:var(--s1)}
+tbody td{border-bottom:var(--ms-track-bd);vertical-align:middle;padding:1.2mm 0}
+tbody tr:last-child td{border-bottom:0}
+td.q{padding-right:3mm}
+td.q .t{font-size:9.6pt;font-weight:600;line-height:1.25}
+td.q .d{font-size:7.6pt;color:var(--ms-t2);line-height:1.3;margin-top:.6mm}
+.no{display:inline-block;width:4.2mm;color:var(--ms-t3);font-weight:500;font-size:8.5pt}
+td.o{text-align:center;padding-left:1mm;padding-right:1mm}
+.opt{display:flex;align-items:center;justify-content:center;height:7.4mm;border:1px solid #D8D8D8;border-radius:999px;cursor:pointer;position:relative;
+  font-size:7.6pt;font-weight:600;color:#9A9A9A;background:#fff;transition:.12s;user-select:none}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt:hover{border-color:#999;color:#555}
+.opt.v4:has(input:checked){background:var(--s4);border-color:var(--s4);color:#fff}
+.opt.v3:has(input:checked){background:var(--s3);border-color:var(--s3);color:#fff}
+.opt.v2:has(input:checked){background:var(--s2);border-color:var(--s2);color:#fff}
+.opt.v1:has(input:checked){background:var(--s1);border-color:var(--s1);color:#fff}
+tr.miss td.q .t{color:#C0392B}
+
+/* 정성 */
+.qa{flex:1;display:flex;flex-direction:column;gap:2.4mm;min-height:0}
+.qa .item{flex:1 1 0;display:flex;flex-direction:column;min-height:0}
+.qa .lbl{font-size:9.6pt;font-weight:600;margin-bottom:1.2mm}
+.qa .lbl .d{font-size:7.6pt;color:var(--ms-t2);font-weight:400;margin-left:1.5mm}
+.qa .box{flex:1;border:1px solid #DDD;border-radius:var(--ms-art-r);padding:2mm 2.4mm;font-size:9.3pt;line-height:1.5;outline:0;overflow:hidden;background:#FFF}
+.qa .box:focus{border-color:var(--sys-acc)}
+.qa .box:empty:before{content:attr(data-ph);color:var(--ms-t3)}
+
+.ft{padding-top:3mm;margin-top:3mm;border-top:var(--ms-track-bd);font-size:7.3pt;color:var(--ms-t3);display:flex;justify-content:space-between}
+
+/* ── 액션 바 ── */
+.bar{width:210mm;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-size:13px;font-weight:600;padding:11px 18px;border:0;border-radius:var(--ms-br-r);cursor:pointer;background:var(--ms-chip-bg);color:var(--ms-t1)}
+.btn.pri{background:var(--sys-acc,var(--ms-btn-bg));color:var(--sys-acc-c,var(--ms-btn-c))}
+.btn.dark{background:var(--ms-btn-bg);color:var(--ms-btn-c)}
+.btn:disabled{opacity:.4;cursor:default}
+.sp{flex:1}
+.msg{font-size:12.5px;color:var(--ms-t2);width:210mm;text-align:right;min-height:18px}
+.msg.ok{color:var(--sys-acc);font-weight:600}
+.msg.err{color:#C0392B;font-weight:600}
+.hint{width:210mm;font-size:11.5px;color:var(--ms-t3);line-height:1.5}
+
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:#fff;padding:0;display:block}
+  .top,.bar,.msg,.hint{display:none!important}
+  .sheet{display:flex;box-shadow:none;border-radius:0;width:210mm;height:296.5mm;overflow:hidden;page-break-after:always}
+  .sheet:last-of-type{page-break-after:auto}
+  .info .v{border-bottom-color:#DDD}
+  .opt{border-color:#BBB;color:#777}
+  .opt:has(input:checked){background:#111!important;border-color:#111!important;color:#fff!important}
+  .qa .box{border-color:#CCC}
+  .qa .box:empty:before{content:""}
+}
+@media screen and (max-width:860px){
+  body{padding:10px 6px 40px}
+  .top,.sheet,.bar,.msg,.hint{width:100%;max-width:210mm}
+  .sheet{height:auto;min-height:297mm;padding:9mm 7mm}
+  .judge{flex-wrap:wrap}
+  .tabs{flex-wrap:wrap}.tab{flex:1 1 22%}
+  .info{grid-template-columns:1fr 1fr}
+  .info>div:nth-child(2){border-right:0}
+  .info>div:nth-child(3){padding-left:0;border-top:var(--ms-track-bd)}
+  .info>div:nth-child(4){border-top:var(--ms-track-bd)}
+  col.co{width:17mm}.opt{font-size:7pt}
+  .qa .box{min-height:28mm}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="judge">
+    <div class="f"><label>심사위원 성명</label><input id="jname" type="text" placeholder="성명" autocomplete="off"></div>
+    <div class="f"><label>소속 · 직위</label><input id="jorg" type="text" placeholder="기관 · 직위" autocomplete="off"></div>
+    <div class="f" style="flex:.6"><label>평가일자</label><div class="fixed">2026. 10. 14</div></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<div id="sheets"></div>
+
+<div class="bar">
+  <button class="btn" id="prev">← 이전</button>
+  <button class="btn dark" id="next">다음 기업 →</button>
+  <span class="sp"></span>
+  <button class="btn" id="print">PDF 저장 / 인쇄 (8장)</button>
+  <button class="btn pri" id="submit">전체 접수 <span id="cnt">0/8</span></button>
+</div>
+<div class="msg" id="msg"></div>
+<div class="hint">기업 탭을 눌러 8개사를 모두 작성한 뒤 [전체 접수]를 한 번만 누르면 됩니다. 작성 중 내용은 이 기기 브라우저에 자동 저장됩니다. 접수 후 수정이 필요하면 고친 뒤 다시 [전체 접수]를 누르면 최신 내용으로 갱신됩니다.</div>
+
+<script>
+const SB_URL = "https://lizfpvkorrdtmnguvawd.supabase.co";
+const SB_KEY = "sb_publishable_z19FfnVOxYTKuYRbajfLVg_WjRScCqE";
+const COMPANIES = ["로웨인","로지스틱스테크스탠다드","한나바이오","스푼타임","메이투투","플랜트너","에딧미","보나플로"];
+const Q = [
+  ["협업과제의 명확성","무엇을, 누구와, 왜 협업하려는지 구체적인가"],
+  ["식품 밸류체인 연계성","원료·가공·유통·소비 중 어느 단계에 어떻게 기여하는가"],
+  ["기술·제품의 차별성","기존 대안 대비 차별 포인트가 분명한가"],
+  ["협업 실현 가능성","제안한 PoC 범위·기간·자원이 현실적인가"],
+  ["수요기업 관점의 매력도","대·중견기업이 받아들일 이유가 있는가"],
+  ["사업성·확장성","협업 성공 시 시장·매출 확장 여지"],
+  ["발표 전달력","12분 내 핵심 전달, 질의 대응"],
+];
+const SCALE = [[4,"매우 좋음"],[3,"좋음"],[2,"보완 필요"],[1,"보완 시급"]];
+const C = [
+  ["협업 가능성이 높아 보이는 포인트","강점","예) 수요기업의 어떤 니즈와 맞닿아 있는지, 바로 시도해볼 만한 협업 형태"],
+  ["보완·검증이 필요한 사항","","예) 과제 범위, 기술·품질 검증, 규제·인증, 단가·물량 등"],
+  ["추천 협업 파트너 또는 다음 단계 제언","","예) 연결하면 좋을 기업·기관, 다음 단계로 권하는 액션"],
+];
+const $ = id=>document.getElementById(id);
+const esc = s=>s.replace(/</g,"&lt;");
+
+// ── 시트 8장 생성 ──
+$("sheets").innerHTML = COMPANIES.map((co,ci)=>{ const k=ci+1; return `
+<div class="sheet" id="s${k}" data-k="${k}">
+  <div class="hd">
+    <h1>발제 평가의견서</h1>
+    <div class="meta">산들바다 <b>푸드 스타트업 오픈이노베이션</b><br>2026. 10. 14 (수) · 코엑스마곡 컨벤션센터 501호</div>
+  </div>
+  <div class="info">
+    <div><label>발제기업</label><div class="v co"><span class="no">${k}</span>${co}</div></div>
+    <div><label>심사위원</label><div class="v ph j-name">성명</div></div>
+    <div><label>소속</label><div class="v ph j-org">기관 · 직위</div></div>
+    <div><label>평가일자</label><div class="v">2026. 10. 14</div></div>
+  </div>
+  <div class="body">
+    <section class="sec">
+      <div class="sec-hd"><span class="n">01</span><h2>정량평가</h2><span class="s">항목별 1개 선택 · 순위 산정 없음</span></div>
+      <table>
+        <colgroup><col class="cq"><col class="co"><col class="co"><col class="co"><col class="co"></colgroup>
+        <thead><tr><th>평가 항목</th>${SCALE.map(([v,l])=>`<th class="h${v}">${l}</th>`).join("")}</tr></thead>
+        <tbody>${Q.map((q,i)=>`<tr id="r${k}_${i+1}">
+          <td class="q"><div class="t"><span class="no">${i+1}</span>${q[0]}</div><div class="d"><span class="no"></span>${q[1]}</div></td>
+          ${SCALE.map(([v,l])=>`<td class="o"><label class="opt v${v}"><input type="radio" name="q${k}_${i+1}" value="${v}">${l}</label></td>`).join("")}
+        </tr>`).join("")}</tbody>
+      </table>
+    </section>
+    <section class="sec">
+      <div class="sec-hd"><span class="n">02</span><h2>정성평가</h2><span class="s">자유 서술</span></div>
+      <div class="qa">${C.map((c,i)=>`<div class="item">
+        <div class="lbl"><span class="no">${i+1}</span>${c[0]}${c[1]?`<span class="d">${c[1]}</span>`:""}</div>
+        <div class="box" id="c${k}_${i+1}" contenteditable="true" data-ph="${c[2]}"></div>
+      </div>`).join("")}</div>
+    </section>
+  </div>
+  <div class="ft"><span>본 의견서는 발제기업 피드백 및 밋업 연계 참고 자료로만 활용되며, 순위·시상에 사용되지 않습니다.</span><span>${k} / 8</span></div>
+</div>`;}).join("");
+
+$("tabs").innerHTML = COMPANIES.map((co,i)=>`<button class="tab" data-k="${i+1}"><span class="n">${i+1}</span><span class="c">${co}</span></button>`).join("");
+
+// ── 상태 ──
+let cur = 1;
+const STORE = "sb_eval_v2";
+function readState(){
+  const st = { jname:$("jname").value.trim(), jorg:$("jorg").value.trim(), sheets:{} };
+  for(let k=1;k<=8;k++){ const s={q:{},c:{}};
+    for(let i=1;i<=7;i++){ const r=document.querySelector(`input[name="q${k}_${i}"]:checked`); if(r) s.q[i]=+r.value; }
+    for(let i=1;i<=3;i++){ s.c[i]=$(`c${k}_${i}`).innerText.trim(); }
+    st.sheets[k]=s; }
+  return st;
+}
+function applyState(st){
+  if(!st) return;
+  $("jname").value=st.jname||""; $("jorg").value=st.jorg||"";
+  for(let k=1;k<=8;k++){ const s=st.sheets&&st.sheets[k]; if(!s) continue;
+    for(let i=1;i<=7;i++){ if(s.q[i]){ const r=document.querySelector(`input[name="q${k}_${i}"][value="${s.q[i]}"]`); if(r) r.checked=true; } }
+    for(let i=1;i<=3;i++){ if(s.c[i]) $(`c${k}_${i}`).innerText=s.c[i]; } }
+}
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(readState())); }catch(e){} }
+try{ applyState(JSON.parse(localStorage.getItem(STORE)||"null")); }catch(e){}
+
+const complete = (st,k)=>Object.keys(st.sheets[k].q).length===7;
+function refresh(){
+  const st=readState();
+  document.querySelectorAll(".j-name").forEach(e=>{ e.textContent=st.jname||"성명"; e.classList.toggle("ph",!st.jname); });
+  document.querySelectorAll(".j-org").forEach(e=>{ e.textContent=st.jorg||"기관 · 직위"; e.classList.toggle("ph",!st.jorg); });
+  let n=0;
+  document.querySelectorAll(".tab").forEach(t=>{ const k=+t.dataset.k; const d=complete(st,k); if(d) n++; t.classList.toggle("done",d); t.classList.toggle("active",k===cur); });
+  document.querySelectorAll(".sheet").forEach(s=>s.classList.toggle("active",+s.dataset.k===cur));
+  $("cnt").textContent=`${n}/8`;
+  $("prev").disabled=cur===1; $("next").textContent = cur===8 ? "마지막 기업입니다" : "다음 기업 →"; $("next").disabled=cur===8;
+}
+function go(k){ cur=Math.min(8,Math.max(1,k)); refresh(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("tabs").addEventListener("click",e=>{ const t=e.target.closest(".tab"); if(t) go(+t.dataset.k); });
+$("prev").addEventListener("click",()=>go(cur-1));
+$("next").addEventListener("click",()=>go(cur+1));
+document.body.addEventListener("input",()=>{ save(); refresh(); unlock(); });
+document.body.addEventListener("change",()=>{ save(); refresh(); unlock(); });
+
+const msg=(t,c="")=>{ $("msg").textContent=t; $("msg").className="msg "+c; };
+let submitted=false;
+function unlock(){ if(submitted){ submitted=false; $("submit").disabled=false; msg("내용이 수정되었습니다 — 다시 [전체 접수]하면 최신 내용으로 갱신됩니다."); } }
+
+$("submit").addEventListener("click", async ()=>{
+  const st=readState(); const errs=[];
+  document.querySelectorAll("tr.miss").forEach(r=>r.classList.remove("miss"));
+  if(!st.jname) errs.push("심사위원 성명");
+  const inc=[];
+  for(let k=1;k<=8;k++){ if(!complete(st,k)){ inc.push(k); for(let i=1;i<=7;i++) if(!st.sheets[k].q[i]) $(`r${k}_${i}`).classList.add("miss"); } }
+  if(inc.length) errs.push("미완료 기업: "+inc.map(k=>`${k}.${COMPANIES[k-1]}`).join(", "));
+  if(errs.length){ msg("접수 불가 — "+errs.join(" / "),"err"); if(inc.length) go(inc[0]); return; }
+  const rows=[]; for(let k=1;k<=8;k++){ const s=st.sheets[k];
+    rows.push({ company_no:k, company_name:COMPANIES[k-1], judge_name:st.jname, judge_org:st.jorg||null,
+      q1:s.q[1],q2:s.q[2],q3:s.q[3],q4:s.q[4],q5:s.q[5],q6:s.q[6],q7:s.q[7], c1:s.c[1]||null,c2:s.c[2]||null,c3:s.c[3]||null }); }
+  $("submit").disabled=true; msg("접수 중…");
+  try{
+    const r=await fetch(SB_URL+"/rest/v1/evaluations",{ method:"POST",
+      headers:{"Content-Type":"application/json","apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Prefer":"return=minimal"},
+      body:JSON.stringify(rows) });
+    if(!r.ok){ const t=await r.text(); throw new Error(r.status+" "+t.slice(0,160)); }
+    submitted=true; msg(`접수 완료 · ${st.jname} 심사위원, 8개사 평가의견서가 제출되었습니다. 감사합니다.`,"ok");
+  }catch(e){ msg("접수 실패 — 다시 시도해 주세요 ("+e.message+")","err"); $("submit").disabled=false; }
+});
+$("print").addEventListener("click",()=>window.print());
+refresh();
+</script>
+</body>
+</html>
