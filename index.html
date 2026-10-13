@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>산들바다 발제 평가의견서</title>
+<meta name="robots" content="noindex">
+<style>
+/* ── 디자인 시스템: 미니멀리즘 × Emerald ── */
+:root{
+  --sys-acc:#10B981; --sys-acc-c:#fff; --sys-tint:rgba(16,185,129,0.16);
+  --sys-stage:linear-gradient(135deg,#10B981,rgb(10,115,80));
+  --ms-br-r:2px; --ms-br-sh:0 1px 3px rgba(0,0,0,.06);
+  --ms-main-bg:#fff; --ms-t1:#111; --ms-t2:#888; --ms-t3:#BBB;
+  --ms-btn-bg:#1A1A1A; --ms-btn-c:#fff; --ms-btn-sh:none;
+  --ms-chip-bg:#F4F4F4; --ms-chip-c:#888; --ms-chip-r:2px; --ms-art-r:2px;
+  --ms-track-bd:1px solid #EEE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#F4F4F4;color:var(--ms-t1);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",system-ui,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{padding:28px 12px 60px;display:flex;flex-direction:column;align-items:center;gap:14px}
+
+/* ── 용지 ── */
+.sheet{width:210mm;height:297mm;background:var(--ms-main-bg);box-shadow:var(--ms-br-sh);
+  padding:14mm 15mm 12mm;display:flex;flex-direction:column;border-radius:var(--ms-br-r)}
+
+/* 헤더 */
+.hd{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:4mm;border-bottom:1.5px solid var(--ms-t1)}
+.hd h1{font-size:19pt;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hd .meta{text-align:right;font-size:8.5pt;color:var(--ms-t2);line-height:1.6}
+.hd .meta b{color:var(--ms-t1);font-weight:600}
+
+/* 식별 정보 */
+.info{display:grid;grid-template-columns:1.25fr 1fr 1fr .7fr;gap:0;border-bottom:var(--ms-track-bd);margin-bottom:4mm}
+.info>div{padding:3mm 0 2.6mm;border-right:var(--ms-track-bd);padding-right:3mm}
+.info>div+div{padding-left:3.5mm}
+.info>div:last-child{border-right:0}
+.info label{display:block;font-size:7.5pt;color:var(--ms-t2);letter-spacing:.06em;margin-bottom:1.4mm}
+.info select,.info input{width:100%;border:0;border-bottom:1px solid #DDD;background:transparent;font:inherit;font-size:11pt;
+  font-weight:600;color:var(--ms-t1);padding:0 0 1mm;outline:0;border-radius:0;-webkit-appearance:none;appearance:none}
+.info select{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 1mm center;padding-right:5mm;cursor:pointer}
+.info select:focus,.info input:focus{border-bottom-color:var(--sys-acc)}
+.info input::placeholder{color:var(--ms-t3);font-weight:400}
+.info .fixed{font-size:11pt;font-weight:600;padding-bottom:1mm;border-bottom:1px solid transparent}
+
+/* 섹션 공통: 정량·정성 1:1 */
+.body{flex:1;display:flex;flex-direction:column;min-height:0}
+.sec{flex:1 1 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.sec+.sec{border-top:var(--ms-track-bd);padding-top:3.5mm}
+.sec-hd{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:2.2mm}
+.sec-hd .n{font-size:8pt;color:var(--sys-acc);font-weight:700;letter-spacing:.1em}
+.sec-hd h2{font-size:11.5pt;font-weight:700}
+.sec-hd .s{font-size:7.5pt;color:var(--ms-t2);margin-left:auto}
+
+/* 정량 표 */
+table{width:100%;border-collapse:collapse;flex:1;table-layout:fixed}
+col.cq{width:auto}col.co{width:18mm}
+thead th{font-size:7.5pt;font-weight:500;color:var(--ms-t2);padding:0 0 1.6mm;border-bottom:1px solid #DDD;text-align:center;letter-spacing:.02em}
+thead th:first-child{text-align:left}
+tbody td{border-bottom:var(--ms-track-bd);vertical-align:middle;padding:1.2mm 0}
+tbody tr:last-child td{border-bottom:0}
+td.q{padding-right:3mm}
+td.q .t{font-size:9.6pt;font-weight:600;line-height:1.25}
+td.q .d{font-size:7.6pt;color:var(--ms-t2);line-height:1.3;margin-top:.6mm}
+td.q .no{display:inline-block;width:4.2mm;color:var(--ms-t3);font-weight:500;font-size:8.5pt}
+td.o{text-align:center}
+.opt{display:inline-flex;align-items:center;justify-content:center;width:7.2mm;height:7.2mm;border:1px solid #CFCFCF;border-radius:50%;cursor:pointer;position:relative;transition:.12s}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt i{width:3.4mm;height:3.4mm;border-radius:50%;background:transparent}
+.opt:hover{border-color:var(--sys-acc)}
+.opt:has(input:checked){border-color:var(--sys-acc);background:var(--sys-tint)}
+.opt:has(input:checked) i{background:var(--sys-acc)}
+tr.miss td.q .t{color:#C0392B}
+
+/* 정성 */
+.qa{flex:1;display:flex;flex-direction:column;gap:2.4mm;min-height:0}
+.qa .item{flex:1 1 0;display:flex;flex-direction:column;min-height:0}
+.qa .lbl{font-size:9.6pt;font-weight:600;margin-bottom:1.2mm}
+.qa .lbl .no{display:inline-block;width:4.2mm;color:var(--ms-t3);font-weight:500;font-size:8.5pt}
+.qa .lbl .d{font-size:7.6pt;color:var(--ms-t2);font-weight:400;margin-left:1.5mm}
+.qa .box{flex:1;border:1px solid #DDD;border-radius:var(--ms-art-r);padding:2mm 2.4mm;font-size:9.3pt;line-height:1.5;outline:0;overflow:hidden;
+  background:#FFF}
+.qa .box:focus{border-color:var(--sys-acc)}
+.qa .box:empty:before{content:attr(data-ph);color:var(--ms-t3)}
+
+/* 푸터 */
+.ft{display:flex;justify-content:space-between;align-items:flex-end;padding-top:3mm;margin-top:3mm;border-top:var(--ms-track-bd);font-size:7.3pt;color:var(--ms-t3)}
+
+/* 액션 바 */
+.bar{width:210mm;display:flex;gap:8px;align-items:center}
+.btn{font:inherit;font-size:13px;font-weight:600;padding:11px 18px;border:0;border-radius:var(--ms-br-r);cursor:pointer;
+  background:var(--ms-chip-bg);color:var(--ms-t1);box-shadow:var(--ms-btn-sh)}
+.btn.pri{background:var(--sys-acc,var(--ms-btn-bg));color:var(--sys-acc-c,var(--ms-btn-c))}
+.btn:disabled{opacity:.45;cursor:default}
+.msg{font-size:12.5px;color:var(--ms-t2);margin-left:auto;text-align:right}
+.msg.ok{color:var(--sys-acc);font-weight:600}
+.msg.err{color:#C0392B;font-weight:600}
+.hint{width:210mm;font-size:11.5px;color:var(--ms-t3);line-height:1.5}
+
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:#fff;padding:0;display:block}
+  .sheet{box-shadow:none;border-radius:0;width:210mm;height:296.5mm;overflow:hidden;page-break-after:avoid}
+  .bar,.hint{display:none!important}
+  .info select{background-image:none;padding-right:0}
+  .info select,.info input{border-bottom-color:#DDD}
+  .opt{border-color:#BBB}
+  .opt:has(input:checked){border-color:#111;background:#fff}
+  .opt:has(input:checked) i{background:#111}
+  .qa .box{border-color:#CCC}
+  .qa .box:empty:before{content:""}
+}
+@media screen and (max-width:860px){
+  body{padding:10px 6px 40px}
+  .sheet,.bar,.hint{width:100%;max-width:210mm}
+  .sheet{height:auto;min-height:297mm;padding:9mm 7mm}
+  .info{grid-template-columns:1fr 1fr}
+  .info>div:nth-child(2){border-right:0}
+  .info>div:nth-child(3){padding-left:0;border-top:var(--ms-track-bd)}
+  .info>div:nth-child(4){border-top:var(--ms-track-bd)}
+  td.o{width:14mm}
+  .qa .box{min-height:28mm}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet" id="sheet">
+  <div class="hd">
+    <div>
+      <h1>발제 평가의견서</h1>
+    </div>
+    <div class="meta">
+      산들바다 <b>푸드 스타트업 오픈이노베이션</b><br>
+      2026. 10. 14 (수) · 코엑스마곡 컨벤션센터 501호
+    </div>
+  </div>
+
+  <div class="info">
+    <div>
+      <label>발제기업</label>
+      <select id="company">
+        <option value="">기업을 선택하세요</option>
+        <option value="1">1. 로웨인</option>
+        <option value="2">2. 로지스틱스테크스탠다드</option>
+        <option value="3">3. 한나바이오</option>
+        <option value="4">4. 스푼타임</option>
+        <option value="5">5. 메이투투</option>
+        <option value="6">6. 플랜트너</option>
+        <option value="7">7. 에딧미</option>
+        <option value="8">8. 보나플로</option>
+      </select>
+    </div>
+    <div>
+      <label>심사위원</label>
+      <input id="jname" type="text" placeholder="성명" autocomplete="off">
+    </div>
+    <div>
+      <label>소속</label>
+      <input id="jorg" type="text" placeholder="기관 · 직위" autocomplete="off">
+    </div>
+    <div>
+      <label>평가일자</label>
+      <div class="fixed">2026. 10. 14</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- 정량 -->
+    <section class="sec">
+      <div class="sec-hd"><span class="n">01</span><h2>정량평가</h2><span class="s">해당 항목에 ● 표기 · 순위 산정 없음</span></div>
+      <table>
+        <colgroup><col class="cq"><col class="co"><col class="co"><col class="co"><col class="co"></colgroup>
+        <thead><tr>
+          <th>평가 항목</th>
+          <th>매우 좋음</th><th>좋음</th><th>보완 필요</th><th>보완 시급</th>
+        </tr></thead>
+        <tbody id="qbody"></tbody>
+      </table>
+    </section>
+
+    <!-- 정성 -->
+    <section class="sec">
+      <div class="sec-hd"><span class="n">02</span><h2>정성평가</h2><span class="s">자유 서술</span></div>
+      <div class="qa">
+        <div class="item">
+          <div class="lbl"><span class="no">1</span>협업 가능성이 높아 보이는 포인트 <span class="d">강점</span></div>
+          <div class="box" id="c1" contenteditable="true" data-ph="예) 수요기업의 어떤 니즈와 맞닿아 있는지, 바로 시도해볼 만한 협업 형태"></div>
+        </div>
+        <div class="item">
+          <div class="lbl"><span class="no">2</span>보완·검증이 필요한 사항</div>
+          <div class="box" id="c2" contenteditable="true" data-ph="예) 과제 범위, 기술·품질 검증, 규제·인증, 단가·물량 등"></div>
+        </div>
+        <div class="item">
+          <div class="lbl"><span class="no">3</span>추천 협업 파트너 또는 다음 단계 제언</div>
+          <div class="box" id="c3" contenteditable="true" data-ph="예) 연결하면 좋을 기업·기관, 다음 단계로 권하는 액션"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="ft">
+    <div>본 의견서는 발제기업 피드백 및 밋업 연계 참고 자료로만 활용되며, 순위·시상에 사용되지 않습니다.</div>
+  </div>
+</div>
+
+<div class="bar">
+  <button class="btn pri" id="submit">접수</button>
+  <button class="btn" id="print">PDF 저장 / 인쇄</button>
+  <button class="btn" id="next" style="display:none">다음 기업 작성</button>
+  <div class="msg" id="msg"></div>
+</div>
+<div class="hint">[접수]를 누르면 운영사무국으로 바로 제출됩니다. 같은 기업에 다시 접수하면 최신 내용으로 갱신됩니다. 종이로 제출하실 분은 [PDF 저장 / 인쇄]를 이용해 주세요.</div>
+
+<script>
+const SB_URL = "https://lizfpvkorrdtmnguvawd.supabase.co";
+const SB_KEY = "sb_publishable_z19FfnVOxYTKuYRbajfLVg_WjRScCqE";
+
+const Q = [
+  ["협업과제의 명확성","무엇을, 누구와, 왜 협업하려는지 구체적인가"],
+  ["식품 밸류체인 연계성","원료·가공·유통·소비 중 어느 단계에 어떻게 기여하는가"],
+  ["기술·제품의 차별성","기존 대안 대비 차별 포인트가 분명한가"],
+  ["협업 실현 가능성","제안한 PoC 범위·기간·자원이 현실적인가"],
+  ["수요기업 관점의 매력도","대·중견기업이 받아들일 이유가 있는가"],
+  ["사업성·확장성","협업 성공 시 시장·매출 확장 여지"],
+  ["발표 전달력","12분 내 핵심 전달, 질의 대응"],
+];
+const SCALE = [4,3,2,1]; // 매우 좋음=4 … 보완 시급=1
+const tb = document.getElementById("qbody");
+tb.innerHTML = Q.map((q,i)=>`<tr id="r${i+1}">
+  <td class="q"><div class="t"><span class="no">${i+1}</span>${q[0]}</div><div class="d"><span class="no"></span>${q[1]}</div></td>
+  ${SCALE.map(v=>`<td class="o"><label class="opt"><input type="radio" name="q${i+1}" value="${v}"><i></i></label></td>`).join("")}
+</tr>`).join("");
+
+const $ = id=>document.getElementById(id);
+const msg = (t,c="")=>{ $("msg").textContent=t; $("msg").className="msg "+c; };
+const companyName = ()=>{ const o=$("company").selectedOptions[0]; return o&&o.value? o.textContent.replace(/^\d+\.\s*/,"").split(" · ")[0] : ""; };
+
+try{ $("jname").value = localStorage.getItem("sb_jname")||""; $("jorg").value = localStorage.getItem("sb_jorg")||""; }catch(e){}
+["jname","jorg"].forEach(id=>$(id).addEventListener("input",()=>{ try{localStorage.setItem("sb_"+id,$(id).value);}catch(e){} }));
+
+function collect(){
+  const errs=[];
+  document.querySelectorAll("tr.miss").forEach(r=>r.classList.remove("miss"));
+  if(!$("company").value) errs.push("발제기업");
+  if(!$("jname").value.trim()) errs.push("심사위원 성명");
+  const row={ company_no:+$("company").value, company_name:companyName(),
+    judge_name:$("jname").value.trim(), judge_org:$("jorg").value.trim()||null,
+    c1:$("c1").innerText.trim()||null, c2:$("c2").innerText.trim()||null, c3:$("c3").innerText.trim()||null };
+  let missQ=0;
+  for(let i=1;i<=7;i++){ const s=document.querySelector(`input[name=q${i}]:checked`);
+    if(!s){ missQ++; $("r"+i).classList.add("miss"); } else row["q"+i]=+s.value; }
+  if(missQ) errs.push(`정량 ${missQ}개 항목`);
+  return {row,errs};
+}
+
+$("submit").addEventListener("click", async ()=>{
+  const {row,errs}=collect();
+  if(errs.length){ msg("미입력: "+errs.join(", "),"err"); return; }
+  $("submit").disabled=true; msg("접수 중…");
+  try{
+    const r=await fetch(SB_URL+"/rest/v1/evaluations",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,
+        "Prefer":"return=minimal"},
+      body:JSON.stringify(row)});
+    if(!r.ok){ const t=await r.text(); throw new Error(r.status+" "+t.slice(0,160)); }
+    msg(`접수 완료 · ${row.company_name} / ${row.judge_name}`,"ok");
+    $("next").style.display="";
+  }catch(e){ msg("접수 실패 — 다시 시도해 주세요 ("+e.message+")","err"); $("submit").disabled=false; }
+});
+
+$("print").addEventListener("click", ()=>window.print());
+
+$("next").addEventListener("click", ()=>{
+  $("company").value=""; document.querySelectorAll("input[type=radio]").forEach(r=>r.checked=false);
+  ["c1","c2","c3"].forEach(id=>$(id).textContent="");
+  document.querySelectorAll("tr.miss").forEach(r=>r.classList.remove("miss"));
+  $("submit").disabled=false; $("next").style.display="none"; msg("");
+  window.scrollTo({top:0,behavior:"smooth"}); $("company").focus();
+});
+// 수정 시 재접수 허용
+document.getElementById("sheet").addEventListener("input",()=>{ if($("submit").disabled){ $("submit").disabled=false; msg("내용이 수정되었습니다 — 다시 [접수]하면 갱신됩니다."); } });
+document.getElementById("sheet").addEventListener("change",()=>{ if($("submit").disabled){ $("submit").disabled=false; msg("내용이 수정되었습니다 — 다시 [접수]하면 갱신됩니다."); } });
+</script>
+</body>
+</html>
